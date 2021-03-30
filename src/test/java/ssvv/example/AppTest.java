@@ -2,6 +2,7 @@ package ssvv.example;
 
 import static org.junit.Assert.assertTrue;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ssvv.example.domain.*;
 import ssvv.example.repository.*;
@@ -11,6 +12,7 @@ import ssvv.example.validation.*;
 public class AppTest {
     Service testService;
 
+    //@BeforeClass
     private void initializeData() {
         if (testService == null) {
             StudentValidator studentValidator = new StudentValidator();
