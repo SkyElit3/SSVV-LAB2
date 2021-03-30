@@ -1,6 +1,5 @@
 package ssvv.example;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import ssvv.example.domain.*;
 import ssvv.example.repository.*;
@@ -8,10 +7,9 @@ import ssvv.example.service.*;
 import ssvv.example.validation.*;
 
 public class AppWBT {
-    static Service testService;
+    Service testService;
 
-    @BeforeClass
-    public static void initializeData() {
+    private void initializeData() {
         if (testService == null) {
             StudentValidator studentValidator = new StudentValidator();
             TemaValidator temaValidator = new TemaValidator();
@@ -40,6 +38,7 @@ public class AppWBT {
     @Test
     public void addAssignmentValidInput()
     {
+        initializeData();
         Tema testAssignment = getValidAssignmentInput();
         try{
             testService.addTema(testAssignment);
@@ -52,6 +51,7 @@ public class AppWBT {
     @Test
     public void addAssignmentInvalidInput_NullNrTema()
     {
+        initializeData();
         Tema testAssignment = getInvalidAssignmentInput_nullNrTema();
         try{
             testService.addTema(testAssignment);
