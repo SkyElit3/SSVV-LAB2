@@ -29,7 +29,7 @@ public class AppTest {
     }
 
     private Student getValidStudentInput() {
-        return new Student("idTest1", "Dan", 935, "dan@ubbcluj.ro");
+        return new Student("idTest10", "Dan", 935, "dan@ubbcluj.ro");
     }
 
     private Student getInvalidStudentInput_missingEmail() {
@@ -44,10 +44,26 @@ public class AppTest {
         return new Student("idTest2", "", 935, "ejfpjep@eif.com");
     }
 
+    private Student getValidStudentInput_groupBoundary() {
+        return new Student("idTest10", "Dan", 0, "dan@ubbcluj.ro");
+    }
+
     @Test
     public void addStudentValidInput_ShouldReturnTrue() {
         initializeData();
         Student testStudent = getValidStudentInput();
+        try {
+            Student addedTestStudent = testService.addStudent(testStudent);
+            assert (addedTestStudent.getID().equals(testStudent.getID()));
+        } catch (Exception ex) {
+            assert (false);
+        }
+    }
+
+    @Test
+    public void addStudentValidGroupBoundaryInput_ShouldReturnTrue() {
+        initializeData();
+        Student testStudent = getValidStudentInput_groupBoundary();
         try {
             Student addedTestStudent = testService.addStudent(testStudent);
             assert (addedTestStudent.getID().equals(testStudent.getID()));
@@ -124,5 +140,7 @@ public class AppTest {
             assert(true);
         }
     }
+
+
 
 }
