@@ -1,0 +1,24 @@
+
+Tema: test1
+Nota: 10.0
+Predata in saptamana: 6
+Deadline: 6
+Feedback: OK
+
+Tema: test1
+Nota: 10.0
+Predata in saptamana: 6
+Deadline: 6
+Feedback: OK
+
+Tema: test1
+Nota: 10.0
+Predata in saptamana: 6
+Deadline: 6
+Feedback: OK
+
+Tema: test1
+Nota: 10.0
+Predata in saptamana: 6
+Deadline: 6
+Feedback: OK
