@@ -1,5 +1,6 @@
 package ssvv.example;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 import ssvv.example.domain.*;
 import ssvv.example.repository.*;
@@ -7,9 +8,10 @@ import ssvv.example.service.*;
 import ssvv.example.validation.*;
 
 public class AppWBT {
-    Service testService;
+    static Service testService;
 
-    private void initializeData() {
+    @BeforeClass
+    public static void initializeData() {
         if (testService == null) {
             StudentValidator studentValidator = new StudentValidator();
             TemaValidator temaValidator = new TemaValidator();
@@ -38,7 +40,6 @@ public class AppWBT {
     @Test
     public void addAssignmentValidInput()
     {
-        initializeData();
         Tema testAssignment = getValidAssignmentInput();
         try{
             testService.addTema(testAssignment);
@@ -51,7 +52,6 @@ public class AppWBT {
     @Test
     public void addAssignmentInvalidInput_NullNrTema()
     {
-        initializeData();
         Tema testAssignment = getInvalidAssignmentInput_nullNrTema();
         try{
             testService.addTema(testAssignment);
@@ -61,6 +61,85 @@ public class AppWBT {
         }
     }
 
+    private Tema getInvalidAssignmentInput_EmptyDescriere() {
+        return new Tema("1","",6,4);
+    }
 
+    @Test
+    public void addAssignmentInvalidInput_EmptyDescriere()
+    {
+        Tema testAssignment = getInvalidAssignmentInput_EmptyDescriere();
+        try{
+            testService.addTema(testAssignment);
+            assert(false);
+        }catch (Exception ex){
+            assert(true);
+        }
+    }
+
+    private Tema getInvalidAssignmentInput_HigherDeadline() {
+        return new Tema("1","VVSSlab3",20,4);
+    }
+
+    @Test
+    public void addAssignmentInvalidInput_HigherDeadline()
+    {
+        Tema testAssignment = getInvalidAssignmentInput_HigherDeadline();
+        try{
+            testService.addTema(testAssignment);
+            assert(false);
+        }catch (Exception ex){
+            assert(true);
+        }
+    }
+
+    private Tema getInvalidAssignmentInput_LowerDeadline() {
+        return new Tema("1","VVSSlab3",0,4);
+    }
+
+
+    @Test
+    public void addAssignmentInvalidInput_LowerDeadline()
+    {
+        Tema testAssignment = getInvalidAssignmentInput_LowerDeadline();
+        try{
+            testService.addTema(testAssignment);
+            assert(false);
+        }catch (Exception ex){
+            assert(true);
+        }
+    }
+
+    private Tema getInvalidAssignmentInput_HigherPrimire() {
+        return new Tema("1","VVSSlab3",6,20);
+    }
+
+    @Test
+    public void addAssignmentInvalidInput_HigherPrimire()
+    {
+        Tema testAssignment = getInvalidAssignmentInput_HigherPrimire();
+        try{
+            testService.addTema(testAssignment);
+            assert(false);
+        }catch (Exception ex){
+            assert(true);
+        }
+    }
+
+    private Tema getInvalidAssignmentInput_LowerPrimire() {
+        return new Tema("1","VVSSlab3",6,0);
+    }
+
+    @Test
+    public void addAssignmentInvalidInput_LowerPrimire()
+    {
+        Tema testAssignment = getInvalidAssignmentInput_LowerPrimire();
+        try{
+            testService.addTema(testAssignment);
+            assert(false);
+        }catch (Exception ex){
+            assert(true);
+        }
+    }
 
 }
